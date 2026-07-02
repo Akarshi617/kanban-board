@@ -24,7 +24,7 @@ function App() {
 
   const [inputValue, setInputValue] = useState("");
   const [priorityValue, setPriorityValue] = useState("Medium");
-  const [searchText, setSearchText] = useState(""); // search filter ke liye
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     localStorage.setItem("todoTasks", JSON.stringify(todoTasks));
@@ -50,9 +50,7 @@ function App() {
       isEditing: false,
     };
 
-    const updatedList = [...todoTasks, newTask];
-    setTodoTasks(updatedList);
-
+    setTodoTasks([...todoTasks, newTask]);
     setInputValue("");
     setPriorityValue("Medium");
   }
@@ -145,27 +143,22 @@ function App() {
     return "priority-low";
   }
 
-  // ===== DRAG AND DROP LOGIC =====
-  // jab drag start hota hai, task ki details temporarily store kar lete hain
   function handleDragStart(e, task, column) {
     e.dataTransfer.setData("taskId", task.id);
     e.dataTransfer.setData("fromColumn", column);
   }
 
-  // column ke upar drag hote waqt default behavior rokna padta hai
-  // warna drop event fire hi nahi hota
   function handleDragOver(e) {
     e.preventDefault();
   }
 
-  // jab card ko column par drop karte hain, wahi handleMove wala logic chalayenge
   function handleDrop(e, toColumn) {
     e.preventDefault();
     const taskId = Number(e.dataTransfer.getData("taskId"));
     const fromColumn = e.dataTransfer.getData("fromColumn");
 
     if (fromColumn === toColumn) {
-      return; // same column me drop kiya to kuch mat karo
+      return;
     }
 
     let taskObj = null;
@@ -185,8 +178,6 @@ function App() {
     }
   }
 
-  // ===== SEARCH FILTER LOGIC =====
-  // search box me jo bhi type ho, usse match karne wale tasks hi dikhayenge
   function filterTasks(taskList) {
     return taskList.filter((task) =>
       task.text.toLowerCase().includes(searchText.toLowerCase())
@@ -194,39 +185,51 @@ function App() {
   }
 
   return (
-    <div className="app-wrapper">
-      <h1 className="app-title">My Task Board</h1>
+    <div className="app-shell">
+      {/* ===== SIDEBAR ===== */}
+      <aside className="sidebar">
+        <h1 className="app-title">🗂️ Task Board</h1>
 
-      <div className="add-task-bar">
-        <input
-          type="text"
-          placeholder="Enter new task..."
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-        />
+        <div className="sidebar-section">
+          <label className="sidebar-label">Add New Task</label>
+          <input
+            type="text"
+            placeholder="Enter task..."
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleAddTask()}
+          />
+          <select
+            value={priorityValue}
+            onChange={(e) => setPriorityValue(e.target.value)}
+          >
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+          <button onClick={handleAddTask}>+ Add Task</button>
+        </div>
 
-        <select
-          value={priorityValue}
-          onChange={(e) => setPriorityValue(e.target.value)}
-        >
-          <option value="High">High</option>
-          <option value="Medium">Medium</option>
-          <option value="Low">Low</option>
-        </select>
+        <div className="sidebar-section">
+          <label className="sidebar-label">Search</label>
+          <input
+            type="text"
+            placeholder="🔍 Search tasks..."
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+        </div>
 
-        <button onClick={handleAddTask}>Add Task</button>
-      </div>
+        <div className="sidebar-section stats">
+          <label className="sidebar-label">Overview</label>
+          <p>To Do: {todoTasks.length}</p>
+          <p>In Progress: {progressTasks.length}</p>
+          <p>Done: {doneTasks.length}</p>
+        </div>
+      </aside>
 
-      <div className="search-bar">
-        <input
-          type="text"
-          placeholder="🔍 Search tasks..."
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-        />
-      </div>
-
-      <div className="board">
+      {/* ===== MAIN BOARD ===== */}
+      <main className="board">
 
         <div
           className="column column-todo"
@@ -381,7 +384,7 @@ function App() {
           ))}
         </div>
 
-      </div>
+      </main>
     </div>
   );
 }
