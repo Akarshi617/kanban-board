@@ -197,3 +197,62 @@
   .card:active {
     cursor: grabbing;
   }
+/* ===== RESPONSIVE DESIGN FOR MOBILE ===== */
+
+@media (max-width: 768px) {
+  .app-wrapper {
+    padding: 20px 12px;
+  }
+
+  .app-title {
+    font-size: 28px;
+    text-align: center;
+  }
+
+  .add-task-bar {
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .add-task-bar input,
+  .add-task-bar select,
+  .add-task-bar button {
+    width: 100%;
+  }
+
+  .search-bar {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .search-bar input {
+    width: 100%;
+  }
+
+  .board {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .column {
+    width: 100%;
+    max-width: 400px;
+    min-height: auto;
+  }
+}
+
+@media (max-width: 400px) {
+  .app-title {
+    font-size: 24px;
+  }
+
+  .card-actions {
+    flex-direction: column;
+  }
+
+  .move-btn {
+    width: 100%;
+  }
+}
