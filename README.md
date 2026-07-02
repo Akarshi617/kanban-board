@@ -48,7 +48,7 @@ I added drag and drop using the native HTML5 drag events (dragstart, dragover, d
 
 ## Live Link
 
-(add your Vercel link here once deployed)
+https://kanban-board-pink-pi-94.vercel.app/
 
 ## Author
 
