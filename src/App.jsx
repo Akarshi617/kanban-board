@@ -12,7 +12,7 @@ function App() {
 
   const [todoTasks, setTodoTasks] = useState(() =>
     loadFromStorage("todoTasks", [
-      { id: 1, text: "Design homepage", priority: "Medium" },
+      { id: 1, text: "Design homepage", priority: "Medium", createdAt: "" },
     ])
   );
   const [progressTasks, setProgressTasks] = useState(() =>
@@ -26,6 +26,11 @@ function App() {
   const [priorityValue, setPriorityValue] = useState("Medium");
   const [searchText, setSearchText] = useState("");
 
+  // dark mode ke liye state, localStorage se bhi load kar liya taaki refresh pe yaad rahe
+  const [darkMode, setDarkMode] = useState(() =>
+    loadFromStorage("darkMode", false)
+  );
+
   useEffect(() => {
     localStorage.setItem("todoTasks", JSON.stringify(todoTasks));
   }, [todoTasks]);
@@ -38,6 +43,10 @@ function App() {
     localStorage.setItem("doneTasks", JSON.stringify(doneTasks));
   }, [doneTasks]);
 
+  useEffect(() => {
+    localStorage.setItem("darkMode", JSON.stringify(darkMode));
+  }, [darkMode]);
+
   function handleAddTask() {
     if (inputValue === "") {
       return;
@@ -48,6 +57,10 @@ function App() {
       text: inputValue,
       priority: priorityValue,
       isEditing: false,
+      createdAt: new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
     };
 
     setTodoTasks([...todoTasks, newTask]);
@@ -184,11 +197,24 @@ function App() {
     );
   }
 
+  // progress bar ke liye calculation - total tasks me se kitne done hai
+  const totalTasks = todoTasks.length + progressTasks.length + doneTasks.length;
+  const progressPercent =
+    totalTasks === 0 ? 0 : Math.round((doneTasks.length / totalTasks) * 100);
+
   return (
-    <div className="app-shell">
+    <div className={darkMode ? "app-shell dark" : "app-shell"}>
       {/* ===== SIDEBAR ===== */}
       <aside className="sidebar">
-        <h1 className="app-title">🗂️ Task Board</h1>
+        <div className="sidebar-top">
+          <h1 className="app-title">🗂️ Task Board</h1>
+          <button
+            className="dark-toggle"
+            onClick={() => setDarkMode(!darkMode)}
+          >
+            {darkMode ? "☀️" : "🌙"}
+          </button>
+        </div>
 
         <div className="sidebar-section">
           <label className="sidebar-label">Add New Task</label>
@@ -225,6 +251,16 @@ function App() {
           <p>To Do: {todoTasks.length}</p>
           <p>In Progress: {progressTasks.length}</p>
           <p>Done: {doneTasks.length}</p>
+
+          <div className="progress-wrapper">
+            <div className="progress-bar-bg">
+              <div
+                className="progress-bar-fill"
+                style={{ width: `${progressPercent}%` }}
+              ></div>
+            </div>
+            <p className="progress-label">{progressPercent}% completed</p>
+          </div>
         </div>
       </aside>
 
@@ -268,6 +304,9 @@ function App() {
                 </button>
               </div>
               <span className="priority-tag">{task.priority}</span>
+              {task.createdAt && (
+                <p className="time-tag">Added at {task.createdAt}</p>
+              )}
               <div className="card-actions">
                 <button
                   className="move-btn"
@@ -317,6 +356,9 @@ function App() {
                 </button>
               </div>
               <span className="priority-tag">{task.priority}</span>
+              {task.createdAt && (
+                <p className="time-tag">Added at {task.createdAt}</p>
+              )}
               <div className="card-actions">
                 <button
                   className="move-btn"
@@ -372,6 +414,9 @@ function App() {
                 </button>
               </div>
               <span className="priority-tag">{task.priority}</span>
+              {task.createdAt && (
+                <p className="time-tag">Added at {task.createdAt}</p>
+              )}
               <div className="card-actions">
                 <button
                   className="move-btn"
