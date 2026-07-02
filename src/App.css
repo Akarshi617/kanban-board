@@ -240,3 +240,95 @@ body {
     min-height: auto;
   }
 }
+/* ===== PROGRESS BAR ===== */
+
+.progress-wrapper {
+  margin-top: 10px;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: #4ade80;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.progress-label {
+  font-size: 12px;
+  margin-top: 6px;
+  opacity: 0.9;
+}
+
+/* ===== TASK TIME TAG ===== */
+
+.time-tag {
+  font-size: 11px;
+  color: #999;
+  margin: -6px 0 12px 0;
+}
+
+/* ===== DARK MODE TOGGLE BUTTON ===== */
+
+.sidebar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dark-toggle {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: white;
+  font-size: 16px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.dark-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ===== DARK MODE STYLES ===== */
+
+.app-shell.dark {
+  background: #1e1e2f;
+}
+
+.app-shell.dark .column-todo {
+  background: #2a2438;
+}
+
+.app-shell.dark .column-progress {
+  background: #22283a;
+}
+
+.app-shell.dark .column-done {
+  background: #1f3329;
+}
+
+.app-shell.dark .column h2 {
+  color: #f1f1f1;
+}
+
+.app-shell.dark .card {
+  background: #2e2e42;
+  color: #f1f1f1;
+}
+
+.app-shell.dark .card-top p {
+  color: #f1f1f1;
+}
+
+.app-shell.dark .priority-tag,
+.app-shell.dark .time-tag {
+  color: #aaa;
+}
