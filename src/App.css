@@ -1,0 +1,199 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+  }
+  
+  .app-wrapper {
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 20px;
+    font-family: "Segoe UI", sans-serif;
+  }
+  
+  .app-title {
+    color: white;
+    margin-bottom: 25px;
+    font-size: 40px;
+  }
+  
+  .add-task-bar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 35px;
+  }
+  
+  .add-task-bar input {
+    padding: 14px 16px;
+    border-radius: 8px;
+    border: none;
+    width: 300px;
+    font-size: 16px;
+  }
+  
+  .add-task-bar select {
+    padding: 14px 10px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+  }
+  
+  .add-task-bar button {
+    padding: 14px 24px;
+    border-radius: 8px;
+    border: none;
+    background: #ffd166;
+    color: #333;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .add-task-bar button:hover {
+    background: #ffc233;
+  }
+  
+  .board {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 1100px;
+  }
+  
+  .column {
+    border-radius: 14px;
+    padding: 20px;
+    width: 320px;
+    min-height: 500px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .column-todo {
+    background: #fff3e0;
+  }
+  
+  .column-progress {
+    background: #e3f2fd;
+  }
+  
+  .column-done {
+    background: #e8f5e9;
+  }
+  
+  .column h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+  }
+  
+  .card {
+    background: white;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    border-left: 6px solid #ccc;
+  }
+  
+  .priority-high {
+    border-left-color: #ef4444;
+  }
+  
+  .priority-medium {
+    border-left-color: #f59e0b;
+  }
+  
+  .priority-low {
+    border-left-color: #10b981;
+  }
+  
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  
+  .card-top p {
+    margin: 0;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .edit-input {
+    flex: 1;
+    font-size: 16px;
+    padding: 4px 6px;
+    border-radius: 4px;
+    border: 1px solid #999;
+  }
+  
+  .priority-tag {
+    display: inline-block;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 12px;
+  }
+  
+  .card-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  
+  .move-btn {
+    background: #eef2ff;
+    border: none;
+    color: #4f46e5;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 6px;
+  }
+  
+  .move-btn:hover {
+    background: #c7d2fe;
+  }
+  
+  .delete-btn {
+    background: none;
+    border: none;
+    color: #bbb;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 2px 6px;
+    flex-shrink: 0;
+  }
+  
+  .delete-btn:hover {
+    color: #dc2626;
+  }
+  .search-bar {
+    margin-bottom: 25px;
+  }
+  
+  .search-bar input {
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: none;
+    width: 320px;
+    font-size: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card {
+    cursor: grab;
+  }
+  
+  .card:active {
+    cursor: grabbing;
+  }
